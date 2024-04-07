@@ -7,7 +7,7 @@ api = Api(app)
 
 class CovidPeru(Resource):
     def get(self):
-        df = pd.read_csv("/Users/chvasquez/PycharmProjects/API_Example/covid19.csv")
+        df = pd.read_csv("covid19.csv")
         df['date'] = pd.to_datetime(df['date'], infer_datetime_format=True)
         df = df[(df['country']=='Peru') & (df['date'] == '2020-09-02')]
         return df.to_csv()
@@ -15,5 +15,5 @@ class CovidPeru(Resource):
 api.add_resource(CovidPeru, '/')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
